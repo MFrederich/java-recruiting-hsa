@@ -1,7 +1,5 @@
 package com.concrete.desafio.categories;
 
-import com.concrete.desafio.categories.api.CategoryRepository;
-import com.concrete.desafio.categories.api.CategoryThree;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -21,10 +19,20 @@ public class CategoryController {
 
   @ResponseBody
   @RequestMapping(
-      value = "/getTopCategorie",
+      value = "/getTopCategories",
       produces = MediaType.APPLICATION_JSON_VALUE,
       method = RequestMethod.GET)
   public List<CategoryResponse> getTopCategorie() {
-    return categoryService.topCategories();
+    return categoryService.topFiveCategories();
   }
+
+  @ResponseBody
+  @RequestMapping(
+          value = "/getRemainingCategories",
+          produces = MediaType.APPLICATION_JSON_VALUE,
+          method = RequestMethod.GET)
+  public List<CategoryResponse> getRemainingCategorie() {
+    return categoryService.remainingCategories();
+  }
+
 }

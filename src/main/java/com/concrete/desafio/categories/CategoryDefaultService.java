@@ -20,9 +20,19 @@ public class CategoryDefaultService implements CategoryService {
   }
 
   @Override
-  public List<CategoryResponse> topCategories() {
+  public List<CategoryResponse> topFiveCategories() {
     List<SubcategoryLvTwo> subcategoryLvTwo = sortSubCategoryLvTwo();
     return mapCategories(subcategoryLvTwo).stream().limit(5).collect(Collectors.toList());
+  }
+
+  @Override
+  public List<CategoryResponse> remainingCategories() {
+    List<SubcategoryLvTwo> subcategoryLvTwo = sortSubCategoryLvTwo();
+    List<String> topCategoryNameList =
+        topFiveCategories().stream().map(CategoryResponse::getName).collect(Collectors.toList());
+    return mapCategories(subcategoryLvTwo).stream()
+        .filter(sub -> !topCategoryNameList.contains(sub.getName()))
+        .collect(Collectors.toList());
   }
 
   private List<SubcategoryLvTwo> sortSubCategoryLvTwo() {

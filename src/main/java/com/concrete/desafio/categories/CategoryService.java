@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface CategoryService {
 
-  List<CategoryResponse> topCategories();
+  List<CategoryResponse> topFiveCategories();
+
+  List<CategoryResponse> remainingCategories();
 }
