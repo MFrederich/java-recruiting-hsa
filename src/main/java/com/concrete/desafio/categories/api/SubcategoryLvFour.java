@@ -1,4 +1,4 @@
-package com.concrete.desafio.categories;
+package com.concrete.desafio.categories.api;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;

@@ -1,40 +1,38 @@
-package com.concrete.desafio.categories;
+package com.concrete.desafio.categories.api;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class SubcategoryLvTwo extends Category {
+public class CategoryThree extends Category {
 
-  private String iconImageUrl;
-  private List<SubcategoryLvThree> subcategories;
+  private List<Subcategory> subcategories;
 
-    public SubcategoryLvTwo() {
-    }
+  public CategoryThree() {}
 
-    public SubcategoryLvTwo(
+  public CategoryThree(
       final String id,
       final String name,
       final int relevance,
-      final String iconImageUrl,
-      final List<SubcategoryLvThree> subcategoryLvThree) {
+      final List<Subcategory> subcategories) {
     super(id, name, relevance);
-    this.iconImageUrl = iconImageUrl;
-    this.subcategories = subcategoryLvThree;
+    this.subcategories = subcategories;
   }
 
-  public String getIconImageUrl() {
-    return iconImageUrl;
-  }
+  public List<Subcategory> getSubcategories() {
+    List<SubcategoryLvTwo> subcategoryLvTwos = new ArrayList<SubcategoryLvTwo>();
+    subcategories.stream().filter(x -> !subcategoryLvTwos.contains(x)).collect(Collectors.toList());
 
-  public List<SubcategoryLvThree> getSubcategories() {
+
     return subcategories;
   }
 
@@ -43,13 +41,12 @@ public class SubcategoryLvTwo extends Category {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     if (!super.equals(o)) return false;
-    SubcategoryLvTwo that = (SubcategoryLvTwo) o;
-    return Objects.equals(getIconImageUrl(), that.getIconImageUrl())
-        && Objects.equals(getSubcategories(), that.getSubcategories());
+    CategoryThree that = (CategoryThree) o;
+    return Objects.equals(getSubcategories(), that.getSubcategories());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), getIconImageUrl(), getSubcategories());
+    return Objects.hash(super.hashCode(), getSubcategories());
   }
 }

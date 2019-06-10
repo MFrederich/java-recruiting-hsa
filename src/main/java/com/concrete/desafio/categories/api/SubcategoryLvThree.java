@@ -1,4 +1,4 @@
-package com.concrete.desafio.categories;
+package com.concrete.desafio.categories.api;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -17,6 +17,9 @@ public class SubcategoryLvThree extends Category {
   private String mediumImageUrl;
   private String largeImageUrl;
   private List<SubcategoryLvFour> subcategories;
+
+  public SubcategoryLvThree() {
+  }
 
   public SubcategoryLvThree(
       final String id,

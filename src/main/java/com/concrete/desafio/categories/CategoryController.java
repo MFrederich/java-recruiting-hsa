@@ -1,20 +1,29 @@
 package com.concrete.desafio.categories;
 
+import com.concrete.desafio.categories.api.CategoryRepository;
+import com.concrete.desafio.categories.api.CategoryThree;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @ControllerAdvice
-@Controller
+@RestController
 public class CategoryController {
+
+  private CategoryRepository categoryRepository;
+
+  @Autowired
+  public CategoryController(final CategoryRepository categoryRepository) {
+    this.categoryRepository = categoryRepository;
+  }
 
   @ResponseBody
   @RequestMapping(
       value = "/getTopCategorie",
       produces = MediaType.APPLICATION_JSON_VALUE,
       method = RequestMethod.GET)
-  public void getTopCategorie() {}
+  public CategoryThree getTopCategorie() {
+    CategoryThree categoryThree = categoryRepository.getCategoryThree().getBody();
+    return categoryThree;
+  }
 }

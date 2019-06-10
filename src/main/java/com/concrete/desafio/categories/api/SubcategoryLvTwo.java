@@ -1,4 +1,4 @@
-package com.concrete.desafio.categories;
+package com.concrete.desafio.categories.api;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -11,22 +11,30 @@ import java.util.Objects;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CategoryThree extends Category {
+public class SubcategoryLvTwo extends Category {
 
-  private List<Subcategory> subcategories;
+  private String iconImageUrl;
+  private List<SubcategoryLvThree> subcategories;
 
-  public CategoryThree() {}
+    public SubcategoryLvTwo() {
+    }
 
-  public CategoryThree(
+    public SubcategoryLvTwo(
       final String id,
       final String name,
       final int relevance,
-      final List<Subcategory> subcategories) {
+      final String iconImageUrl,
+      final List<SubcategoryLvThree> subcategoryLvThree) {
     super(id, name, relevance);
-    this.subcategories = subcategories;
+    this.iconImageUrl = iconImageUrl;
+    this.subcategories = subcategoryLvThree;
   }
 
-  public List<Subcategory> getSubcategories() {
+  public String getIconImageUrl() {
+    return iconImageUrl;
+  }
+
+  public List<SubcategoryLvThree> getSubcategories() {
     return subcategories;
   }
 
@@ -35,12 +43,13 @@ public class CategoryThree extends Category {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     if (!super.equals(o)) return false;
-    CategoryThree that = (CategoryThree) o;
-    return Objects.equals(getSubcategories(), that.getSubcategories());
+    SubcategoryLvTwo that = (SubcategoryLvTwo) o;
+    return Objects.equals(getIconImageUrl(), that.getIconImageUrl())
+        && Objects.equals(getSubcategories(), that.getSubcategories());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), getSubcategories());
+    return Objects.hash(super.hashCode(), getIconImageUrl(), getSubcategories());
   }
 }
