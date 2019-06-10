@@ -2,24 +2,21 @@ package com.concrete.desafio.categories.api;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class SubcategoryLvThree extends Category {
+public class SubcategoryLvThree extends Category implements Serializable {
 
   private String smallImageUrl;
   private String mediumImageUrl;
   private String largeImageUrl;
   private List<SubcategoryLvFour> subcategories;
 
-  public SubcategoryLvThree() {
-  }
+  public SubcategoryLvThree() {}
 
   public SubcategoryLvThree(
       final String id,

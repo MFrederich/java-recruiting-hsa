@@ -2,13 +2,10 @@ package com.concrete.desafio.categories.api;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Category implements Serializable {
@@ -17,10 +14,9 @@ public class Category implements Serializable {
   private String name;
   private int relevance;
 
-    public Category() {
-    }
+  public Category() {}
 
-    public Category(final String id, final String name, final int relevance) {
+  public Category(final String id, final String name, final int relevance) {
     this.id = id;
     this.name = name;
     this.relevance = relevance;

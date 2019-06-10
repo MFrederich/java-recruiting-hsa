@@ -2,18 +2,16 @@ package com.concrete.desafio.categories.api;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CategoryThree extends Category {
+public class CategoryThree extends Category implements Serializable {
 
   private List<Subcategory> subcategories;
 
@@ -31,7 +29,6 @@ public class CategoryThree extends Category {
   public List<Subcategory> getSubcategories() {
     List<SubcategoryLvTwo> subcategoryLvTwos = new ArrayList<SubcategoryLvTwo>();
     subcategories.stream().filter(x -> !subcategoryLvTwos.contains(x)).collect(Collectors.toList());
-
 
     return subcategories;
   }

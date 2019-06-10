@@ -6,15 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @ControllerAdvice
 @RestController
 public class CategoryController {
 
-  private CategoryRepository categoryRepository;
+  private CategoryService categoryService;
 
   @Autowired
-  public CategoryController(final CategoryRepository categoryRepository) {
-    this.categoryRepository = categoryRepository;
+  public CategoryController(final CategoryService categoryService) {
+    this.categoryService = categoryService;
   }
 
   @ResponseBody
@@ -22,8 +24,7 @@ public class CategoryController {
       value = "/getTopCategorie",
       produces = MediaType.APPLICATION_JSON_VALUE,
       method = RequestMethod.GET)
-  public CategoryThree getTopCategorie() {
-    CategoryThree categoryThree = categoryRepository.getCategoryThree().getBody();
-    return categoryThree;
+  public List<CategoryResponse> getTopCategorie() {
+    return categoryService.topCategories();
   }
 }
