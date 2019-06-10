@@ -2,6 +2,8 @@ package com.concrete.desafio.categories;
 
 import com.concrete.desafio.categories.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -20,19 +22,25 @@ public class CategoryDefaultService implements CategoryService {
   }
 
   @Override
-  public List<CategoryResponse> topFiveCategories() {
-    List<SubcategoryLvTwo> subcategoryLvTwo = sortSubCategoryLvTwo();
-    return mapCategories(subcategoryLvTwo).stream().limit(5).collect(Collectors.toList());
+  public ResponseEntity<List<CategoryResponse>> topFiveCategories() {
+    return new ResponseEntity<List<CategoryResponse>>(getTopFiveCategories(), HttpStatus.OK);
   }
 
   @Override
-  public List<CategoryResponse> remainingCategories() {
+  public ResponseEntity<List<CategoryResponse>> remainingCategories() {
     List<SubcategoryLvTwo> subcategoryLvTwo = sortSubCategoryLvTwo();
     List<String> topCategoryNameList =
-        topFiveCategories().stream().map(CategoryResponse::getName).collect(Collectors.toList());
-    return mapCategories(subcategoryLvTwo).stream()
-        .filter(sub -> !topCategoryNameList.contains(sub.getName()))
-        .collect(Collectors.toList());
+        getTopFiveCategories().stream().map(CategoryResponse::getName).collect(Collectors.toList());
+    return new ResponseEntity<List<CategoryResponse>>(
+        mapCategories(subcategoryLvTwo).stream()
+            .filter(sub -> !topCategoryNameList.contains(sub.getName()))
+            .collect(Collectors.toList()),
+        HttpStatus.OK);
+  }
+
+  private List<CategoryResponse> getTopFiveCategories() {
+    List<SubcategoryLvTwo> subcategoryLvTwo = sortSubCategoryLvTwo();
+    return mapCategories(subcategoryLvTwo).stream().limit(5).collect(Collectors.toList());
   }
 
   private List<SubcategoryLvTwo> sortSubCategoryLvTwo() {

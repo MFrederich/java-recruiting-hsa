@@ -1,12 +1,12 @@
 package com.concrete.desafio.categories;
 
-import com.concrete.desafio.categories.api.CategoryThree;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface CategoryService {
 
-  List<CategoryResponse> topFiveCategories();
+  ResponseEntity<List<CategoryResponse>> topFiveCategories();
 
-  List<CategoryResponse> remainingCategories();
+  ResponseEntity<List<CategoryResponse>> remainingCategories();
 }
