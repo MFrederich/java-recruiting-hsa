@@ -4,10 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -27,9 +25,6 @@ public class CategoryThree extends Category implements Serializable {
   }
 
   public List<Subcategory> getSubcategories() {
-    List<SubcategoryLvTwo> subcategoryLvTwos = new ArrayList<SubcategoryLvTwo>();
-    subcategories.stream().filter(x -> !subcategoryLvTwos.contains(x)).collect(Collectors.toList());
-
     return subcategories;
   }
 

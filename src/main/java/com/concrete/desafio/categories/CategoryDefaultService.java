@@ -23,7 +23,7 @@ public class CategoryDefaultService implements CategoryService {
 
   @Override
   public ResponseEntity<List<CategoryResponse>> topFiveCategories() {
-    return new ResponseEntity<List<CategoryResponse>>(getTopFiveCategories(), HttpStatus.OK);
+    return new ResponseEntity<>(getTopFiveCategories(), HttpStatus.OK);
   }
 
   @Override
@@ -31,7 +31,7 @@ public class CategoryDefaultService implements CategoryService {
     List<SubcategoryLvTwo> subcategoryLvTwo = sortSubCategoryLvTwo();
     List<String> topCategoryNameList =
         getTopFiveCategories().stream().map(CategoryResponse::getName).collect(Collectors.toList());
-    return new ResponseEntity<List<CategoryResponse>>(
+    return new ResponseEntity<>(
         mapCategories(subcategoryLvTwo).stream()
             .filter(sub -> !topCategoryNameList.contains(sub.getName()))
             .collect(Collectors.toList()),
@@ -46,8 +46,8 @@ public class CategoryDefaultService implements CategoryService {
   private List<SubcategoryLvTwo> sortSubCategoryLvTwo() {
     CategoryThree categoryThree = categoryRepository.getCategoryThree().getBody();
 
-    if (categoryThree == null) {
-      throw new IllegalArgumentException("CategoryThree can not be null");
+    if (categoryThree.getSubcategories() == null) {
+      throw new IllegalArgumentException("SubCategories can not be null");
     }
 
     return FilterMobileCategories(categoryThree.getSubcategories()).getSubcategories().stream()
@@ -67,6 +67,7 @@ public class CategoryDefaultService implements CategoryService {
   }
 
   private List<CategoryResponse> mapCategories(List<SubcategoryLvTwo> subCategories) {
+
     return subCategories.stream()
         .map(
             sub ->
@@ -75,14 +76,21 @@ public class CategoryDefaultService implements CategoryService {
                     sub.getName(),
                     sub.getRelevance(),
                     sub.getIconImageUrl(),
-                    mapSmallImageUrl(sub.getSubcategories())))
+                    mapSubCategory(sub.getSubcategories())))
         .collect(Collectors.toList());
   }
 
-  private String mapSmallImageUrl(List<SubcategoryLvThree> subcategoryLvThreeList) {
+  private List<SubCategoryResponse> mapSubCategory(
+      List<SubcategoryLvThree> subcategoryLvThreeList) {
     return subcategoryLvThreeList.stream()
-        .findFirst()
-        .map(SubcategoryLvThree::getSmallImageUrl)
-        .orElse("");
+        .map(
+            sub ->
+                new SubCategoryResponse(
+                    sub.getId(),
+                    sub.getName(),
+                    sub.getRelevance(),
+                    sub.getSmallImageUrl(),
+                    sub.getSubcategories()))
+        .collect(Collectors.toList());
   }
 }
