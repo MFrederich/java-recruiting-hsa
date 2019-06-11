@@ -11,7 +11,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.ResponseEntity;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
@@ -23,7 +22,6 @@ import static org.mockito.Mockito.when;
 public class CategoryControllerTest {
 
   @Mock private CategoryRepository categoryRepository;
-  @Mock private HttpServletResponse httpServletResponse;
   private CategoryService categoryService;
   private CategoryController categoryController;
   private ErrorHandler errorHandler;

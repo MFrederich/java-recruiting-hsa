@@ -52,7 +52,7 @@ public class CategoryController {
   }
 
   @ExceptionHandler(FeignException.class)
-  public ResponseEntity handleFeignStatusException(FeignException e, HttpServletResponse response) {
+  public ResponseEntity handleFeignStatusException(final FeignException e, final HttpServletResponse response) {
     response.setStatus(e.status());
     return errorHandler.handlerErrorFeignException(e, response);
   }
