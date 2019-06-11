@@ -17,8 +17,8 @@ public class CategoryDefaultService implements CategoryService {
   private static final String MOBILE_MARKET_ID = "MOB";
 
   @Autowired
-  public CategoryDefaultService(final CategoryRepository categoryResponse) {
-    this.categoryRepository = categoryResponse;
+  public CategoryDefaultService(final CategoryRepository categoryRepository) {
+    this.categoryRepository = categoryRepository;
   }
 
   @Override
@@ -44,7 +44,7 @@ public class CategoryDefaultService implements CategoryService {
   }
 
   private List<SubcategoryLvTwo> sortSubCategoryLvTwo() {
-    CategoryThree categoryThree = categoryRepository.getCategoryThree().getBody();
+    CategoryThree categoryThree = categoryRepository.fetchCategoryThree().getBody();
 
     if (categoryThree.getSubcategories() == null) {
       throw new IllegalArgumentException("SubCategories can not be null");

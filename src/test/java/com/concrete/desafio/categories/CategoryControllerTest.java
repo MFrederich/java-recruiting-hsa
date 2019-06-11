@@ -37,7 +37,7 @@ public class CategoryControllerTest {
 
   @Test
   public void itShouldReturn_expectedTopFiveOutput() throws IOException {
-    when(categoryRepository.getCategoryThree()).thenReturn(expectedApiResponse());
+    when(categoryRepository.fetchCategoryThree()).thenReturn(expectedApiResponse());
     List<CategoryResponse> categoryTopFiveList = categoryController.getTopCategories().getBody();
     List<CategoryResponse> expected = expectedTopFiveOutput();
 
@@ -46,7 +46,7 @@ public class CategoryControllerTest {
 
   @Test
   public void itShouldReturnExpectedTopFiveOutput_whenHaveFourCategories() throws IOException {
-    when(categoryRepository.getCategoryThree()).thenReturn(categoryWithOnlyFourSubcategories());
+    when(categoryRepository.fetchCategoryThree()).thenReturn(categoryWithOnlyFourSubcategories());
     List<CategoryResponse> categoryTopFiveList = categoryController.getTopCategories().getBody();
     List<CategoryResponse> categoryRemainingList =
         categoryController.getRemainingCategories().getBody();
@@ -57,7 +57,7 @@ public class CategoryControllerTest {
 
   @Test
   public void itShouldReturn_expectedRemainingOutput() throws IOException {
-    when(categoryRepository.getCategoryThree()).thenReturn(expectedApiResponse());
+    when(categoryRepository.fetchCategoryThree()).thenReturn(expectedApiResponse());
     List<CategoryResponse> categoryRemainingList =
         categoryController.getRemainingCategories().getBody();
     List<CategoryResponse> expected = expectedRemainingOutput();
@@ -67,7 +67,7 @@ public class CategoryControllerTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void itShouldReturnIllegalArgumentException_whenSubcategoriesIsNull() throws IOException {
-    when(categoryRepository.getCategoryThree()).thenReturn(subCategoryNullOutput());
+    when(categoryRepository.fetchCategoryThree()).thenReturn(subCategoryNullOutput());
     ResponseEntity responseEntity = categoryController.getTopCategories();
     ErrorDTO expectedError = new ErrorDTO("0000", "SubCategories can not be null");
     Assert.assertTrue(responseEntity.getBody() instanceof ErrorDTO);
@@ -76,7 +76,7 @@ public class CategoryControllerTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void itShouldReturnIllegalArgumentException_whenMobileMarketNotFound() throws IOException {
-    when(categoryRepository.getCategoryThree()).thenReturn(subCategoryMobileMarketNotFound());
+    when(categoryRepository.fetchCategoryThree()).thenReturn(subCategoryMobileMarketNotFound());
     ResponseEntity responseEntity = categoryController.getTopCategories();
     ErrorDTO expectedError = new ErrorDTO("0000", "Mobile market category not found");
     Assert.assertTrue(responseEntity.getBody() instanceof ErrorDTO);
