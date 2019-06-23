@@ -13,8 +13,6 @@ public class CategoryThree extends Category implements Serializable {
 
   private List<Subcategory> subcategories;
 
-  public CategoryThree() {}
-
   public CategoryThree(
       final String id,
       final String name,

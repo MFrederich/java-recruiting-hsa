@@ -30,7 +30,7 @@ public class CouponDefaultService implements CouponService {
         filterExpiredCoupon(couponRepository.fetchCoupons().getBody()), HttpStatus.OK);
   }
 
-  public List<Coupon> filterExpiredCoupon(final List<Coupon> couponList) {
+  private List<Coupon> filterExpiredCoupon(final List<Coupon> couponList) {
     if (couponList == null) {
       return Collections.emptyList();
     }
@@ -39,7 +39,7 @@ public class CouponDefaultService implements CouponService {
         .collect(Collectors.toList());
   }
 
-  public boolean isExpired(final String expireDate) {
+  private boolean isExpired(final String expireDate) {
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
     String strDateNow = formatter.format(new Date());
     try {
@@ -51,7 +51,7 @@ public class CouponDefaultService implements CouponService {
     return false;
   }
 
-  public Date mapStringToDate(final String stringDate, final SimpleDateFormat formatter) throws ParseException {
+  private Date mapStringToDate(final String stringDate, final SimpleDateFormat formatter) throws ParseException {
     return formatter.parse(stringDate);
   }
 }

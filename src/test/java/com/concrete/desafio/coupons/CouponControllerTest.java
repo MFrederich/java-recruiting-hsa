@@ -3,7 +3,7 @@ package com.concrete.desafio.coupons;
 import com.concrete.desafio.coupons.api.Coupon;
 import com.concrete.desafio.coupons.api.CouponRepository;
 import com.concrete.desafio.utils.ErrorDTO;
-import com.concrete.desafio.utils.ErrorHandler;
+import com.concrete.desafio.utils.ErrorHandlerController;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,13 +24,13 @@ import static org.mockito.Mockito.when;
 public class CouponControllerTest {
 
   @Mock private CouponRepository couponRepository;
-  private ErrorHandler errorHandler;
+  private ErrorHandlerController errorHandler;
   private CouponService couponService;
   private CouponController couponController;
 
   @Before
   public void setup() {
-    errorHandler = new ErrorHandler();
+    errorHandler = new ErrorHandlerController();
     couponService = new CouponDefaultService(couponRepository);
     couponController = new CouponController(errorHandler, couponService);
   }

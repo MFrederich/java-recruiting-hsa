@@ -32,6 +32,7 @@ dependencies {
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	compile "com.googlecode.json-simple:json-simple:1.1.1"
+	compile group: 'io.github.openfeign', name: 'feign-gson', version: '9.4.0'
 }
 
 dependencyManagement {

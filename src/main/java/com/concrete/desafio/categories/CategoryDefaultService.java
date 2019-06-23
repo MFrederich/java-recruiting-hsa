@@ -28,8 +28,8 @@ public class CategoryDefaultService implements CategoryService {
 
   @Override
   public ResponseEntity<List<CategoryResponse>> remainingCategories() {
-    List<SubcategoryLvTwo> subcategoryLvTwo = sortSubCategoryLvTwo();
-    List<String> topCategoryNameList =
+    final List<SubcategoryLvTwo> subcategoryLvTwo = sortSubCategoryLvTwo();
+    final List<String> topCategoryNameList =
         getTopFiveCategories().stream().map(CategoryResponse::getName).collect(Collectors.toList());
     return new ResponseEntity<>(
         mapCategories(subcategoryLvTwo).stream()
@@ -39,23 +39,23 @@ public class CategoryDefaultService implements CategoryService {
   }
 
   private List<CategoryResponse> getTopFiveCategories() {
-    List<SubcategoryLvTwo> subcategoryLvTwo = sortSubCategoryLvTwo();
+    final List<SubcategoryLvTwo> subcategoryLvTwo = sortSubCategoryLvTwo();
     return mapCategories(subcategoryLvTwo).stream().limit(5).collect(Collectors.toList());
   }
 
   private List<SubcategoryLvTwo> sortSubCategoryLvTwo() {
-    CategoryThree categoryThree = categoryRepository.fetchCategoryThree().getBody();
+    final CategoryThree categoryThree = categoryRepository.fetchCategoryThree().getBody();
 
     if (categoryThree.getSubcategories() == null) {
       throw new IllegalArgumentException("SubCategories can not be null");
     }
 
-    return FilterMobileCategories(categoryThree.getSubcategories()).getSubcategories().stream()
+    return filterMobileCategories(categoryThree.getSubcategories()).getSubcategories().stream()
         .sorted(Comparator.comparing(SubcategoryLvTwo::getRelevance))
         .collect(Collectors.toList());
   }
 
-  private Subcategory FilterMobileCategories(final List<Subcategory> subcategories) {
+  private Subcategory filterMobileCategories(final List<Subcategory> subcategories) {
     if (subcategories == null) {
       throw new IllegalArgumentException("SubCategories can not be null");
     }
@@ -81,7 +81,7 @@ public class CategoryDefaultService implements CategoryService {
   }
 
   private List<SubCategoryResponse> mapSubCategory(
-     final List<SubcategoryLvThree> subcategoryLvThreeList) {
+      final List<SubcategoryLvThree> subcategoryLvThreeList) {
     return subcategoryLvThreeList.stream()
         .map(
             sub ->

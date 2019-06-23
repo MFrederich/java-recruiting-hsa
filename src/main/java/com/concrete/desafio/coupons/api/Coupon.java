@@ -16,8 +16,6 @@ public class Coupon implements Serializable {
   private String image;
   private String expiresAt;
 
-  public Coupon() {}
-
   public Coupon(
       final String id,
       final String description,

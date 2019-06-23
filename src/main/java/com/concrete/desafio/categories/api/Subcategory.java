@@ -12,8 +12,6 @@ public class Subcategory extends Category {
 
   private List<SubcategoryLvTwo> subcategories;
 
-  public Subcategory() {}
-
   public Subcategory(
       final String id,
       final String name,
