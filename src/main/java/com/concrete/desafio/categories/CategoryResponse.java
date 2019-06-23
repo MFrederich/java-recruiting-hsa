@@ -10,8 +10,6 @@ public class CategoryResponse extends Category {
   private String iconImageUrl;
   private List<SubCategoryResponse> subcategories;
 
-  public CategoryResponse() {}
-
   public CategoryResponse(
       final String id,
       final String name,

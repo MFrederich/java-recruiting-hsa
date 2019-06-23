@@ -11,9 +11,6 @@ public class SubCategoryResponse extends Category {
   private String smallImageUrl;
   private List<SubcategoryLvFour> subcategories;
 
-  public SubCategoryResponse() {
-  }
-
   public SubCategoryResponse(
       final String id,
       final String name,

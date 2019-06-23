@@ -16,8 +16,6 @@ public class SubcategoryLvThree extends Category implements Serializable {
   private String largeImageUrl;
   private List<SubcategoryLvFour> subcategories;
 
-  public SubcategoryLvThree() {}
-
   public SubcategoryLvThree(
       final String id,
       final String name,
