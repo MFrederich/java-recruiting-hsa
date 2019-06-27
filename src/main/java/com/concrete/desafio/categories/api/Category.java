@@ -10,9 +10,9 @@ import java.util.Objects;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Category implements Serializable {
 
-  private String id;
-  private String name;
-  private int relevance;
+  private final String id;
+  private final String name;
+  private final int relevance;
 
   public Category(final String id, final String name, final int relevance) {
     this.id = id;
@@ -33,10 +33,10 @@ public class Category implements Serializable {
   }
 
   @Override
-  public boolean equals(Object o) {
+  public boolean equals(final Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    Category that = (Category) o;
+    final Category that = (Category) o;
     return getRelevance() == that.getRelevance()
         && Objects.equals(getId(), that.getId())
         && Objects.equals(getName(), that.getName());

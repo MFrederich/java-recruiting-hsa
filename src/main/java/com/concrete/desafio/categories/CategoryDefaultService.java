@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Service
 public class CategoryDefaultService implements CategoryService {
 
-  private CategoryRepository categoryRepository;
+  private final CategoryRepository categoryRepository;
   private static final String MOBILE_MARKET_ID = "MOB";
 
   @Autowired

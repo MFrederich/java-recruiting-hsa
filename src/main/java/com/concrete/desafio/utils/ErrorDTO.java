@@ -9,10 +9,10 @@ import java.util.Objects;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ErrorDTO implements Serializable {
-  private String code;
-  private String message;
+  private final String code;
+  private final String message;
 
-  public ErrorDTO(String code, String message) {
+  public ErrorDTO(final String code, final String message) {
     this.code = code;
     this.message = message;
   }
@@ -26,10 +26,10 @@ public class ErrorDTO implements Serializable {
   }
 
   @Override
-  public boolean equals(Object o) {
+  public boolean equals(final Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    ErrorDTO errorDTO = (ErrorDTO) o;
+    final ErrorDTO errorDTO = (ErrorDTO) o;
     return Objects.equals(getCode(), errorDTO.getCode())
         && Objects.equals(getMessage(), errorDTO.getMessage());
   }

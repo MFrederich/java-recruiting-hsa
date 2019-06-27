@@ -16,14 +16,14 @@ public class ErrorHandlerController {
 
   @ExceptionHandler(value = Exception.class)
   @ResponseBody
-  public ResponseEntity<ErrorDTO> handlerErrorException(Exception ex) {
+  public ResponseEntity<ErrorDTO> handlerErrorException(final Exception ex) {
     return new ResponseEntity<>(
         new ErrorDTO(DEFAULT_ERROR_CODE, ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
   @ExceptionHandler(FeignException.class)
   public ResponseEntity<ErrorDTO> handlerErrorFeignException(
-      FeignException ex, HttpServletResponse response) {
+          final FeignException ex, final HttpServletResponse response) {
     return new ResponseEntity<>(
         new ErrorDTO(Integer.toString(response.getStatus()), ex.getMessage()),
         HttpStatus.INTERNAL_SERVER_ERROR);

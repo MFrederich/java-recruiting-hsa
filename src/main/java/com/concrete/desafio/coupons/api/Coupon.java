@@ -10,11 +10,11 @@ import java.util.Objects;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Coupon implements Serializable {
 
-  private String id;
-  private String description;
-  private String seller;
-  private String image;
-  private String expiresAt;
+  private final String id;
+  private final String description;
+  private final String seller;
+  private final String image;
+  private final String expiresAt;
 
   public Coupon(
       final String id,
@@ -50,10 +50,10 @@ public class Coupon implements Serializable {
   }
 
   @Override
-  public boolean equals(Object o) {
+  public boolean equals(final Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    Coupon coupon = (Coupon) o;
+    final Coupon coupon = (Coupon) o;
     return Objects.equals(getId(), coupon.getId())
         && Objects.equals(getDescription(), coupon.getDescription())
         && Objects.equals(getSeller(), coupon.getSeller())

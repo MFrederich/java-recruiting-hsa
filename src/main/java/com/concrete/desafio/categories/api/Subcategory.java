@@ -10,7 +10,7 @@ import java.util.Objects;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Subcategory extends Category {
 
-  private List<SubcategoryLvTwo> subcategories;
+  private final List<SubcategoryLvTwo> subcategories;
 
   public Subcategory(
       final String id,
@@ -26,11 +26,11 @@ public class Subcategory extends Category {
   }
 
   @Override
-  public boolean equals(Object o) {
+  public boolean equals(final Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     if (!super.equals(o)) return false;
-    Subcategory that = (Subcategory) o;
+    final Subcategory that = (Subcategory) o;
     return Objects.equals(getSubcategories(), that.getSubcategories());
   }
 

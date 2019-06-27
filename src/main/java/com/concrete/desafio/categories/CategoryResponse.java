@@ -7,8 +7,8 @@ import java.util.Objects;
 
 public class CategoryResponse extends Category {
 
-  private String iconImageUrl;
-  private List<SubCategoryResponse> subcategories;
+  private final String iconImageUrl;
+  private final List<SubCategoryResponse> subcategories;
 
   public CategoryResponse(
       final String id,
@@ -30,12 +30,12 @@ public class CategoryResponse extends Category {
   }
 
   @Override
-  public boolean equals(Object o) {
+  public boolean equals(final Object o) {
 
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     if (!super.equals(o)) return false;
-    CategoryResponse that = (CategoryResponse) o;
+    final CategoryResponse that = (CategoryResponse) o;
     return Objects.equals(getIconImageUrl(), that.getIconImageUrl())
         && Objects.equals(getSubcategories(), that.getSubcategories());
   }
