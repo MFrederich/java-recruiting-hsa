@@ -39,17 +39,17 @@ public class CouponControllerTest {
   public void itShouldReturnExpectedResponse_whenApiIsOk() throws IOException {
     when(couponRepository.fetchCoupons()).thenReturn(expectedApiResponse());
 
-    List<Coupon> coupons = couponController.getCoupons().getBody();
-    List<Coupon> expected = expectedResponse();
+    final List<Coupon> coupons = couponController.getCoupons().getBody();
+    final List<Coupon> expected = expectedResponse();
 
     assertEquals(coupons, expected);
   }
 
     @Test
     public void itShouldReturnException_whenRequestThrowException() {
-        Exception failure = new Exception("not found");
-        ResponseEntity responseEntity = couponController.handlerException(failure);
-        ErrorDTO expectedError = new ErrorDTO("0000", "not found");
+        final Exception failure = new Exception("not found");
+        final ResponseEntity responseEntity = couponController.handlerException(failure);
+        final ErrorDTO expectedError = new ErrorDTO("0000", "not found");
         Assert.assertTrue(responseEntity.getBody() instanceof ErrorDTO);
         assertEquals(responseEntity.getBody(), expectedError);
     }

@@ -20,14 +20,14 @@ public class JsonUtils {
 
   public static String jsonToString(final String fileName) throws IOException {
     final Class parser = JsonUtils.class;
-    InputStream inputStream = parser.getResourceAsStream(String.format("/jsons/%s", fileName));
+    final InputStream inputStream = parser.getResourceAsStream(String.format("/jsons/%s", fileName));
 
     return readFromInputStream(inputStream);
   }
 
-  private static String readFromInputStream(InputStream inputStream) throws IOException {
-    StringBuilder resultStringBuilder = new StringBuilder();
-    try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+  private static String readFromInputStream(final InputStream inputStream) throws IOException {
+    final StringBuilder resultStringBuilder = new StringBuilder();
+    try (final BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
       String line;
       while ((line = br.readLine()) != null) {
         resultStringBuilder.append(line).append("\n");

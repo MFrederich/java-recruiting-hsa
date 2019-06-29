@@ -8,8 +8,8 @@ import java.util.Objects;
 
 public class SubCategoryResponse extends Category {
 
-  private String smallImageUrl;
-  private List<SubcategoryLvFour> subcategories;
+  private final String smallImageUrl;
+  private final List<SubcategoryLvFour> subcategories;
 
   public SubCategoryResponse(
       final String id,
@@ -31,11 +31,11 @@ public class SubCategoryResponse extends Category {
   }
 
   @Override
-  public boolean equals(Object o) {
+  public boolean equals(final Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     if (!super.equals(o)) return false;
-    SubCategoryResponse that = (SubCategoryResponse) o;
+    final SubCategoryResponse that = (SubCategoryResponse) o;
     return Objects.equals(getSmallImageUrl(), that.getSmallImageUrl())
         && Objects.equals(getSubcategories(), that.getSubcategories());
   }

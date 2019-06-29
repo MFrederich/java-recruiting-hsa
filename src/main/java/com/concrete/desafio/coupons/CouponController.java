@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
+@RequestMapping("/coupon")
 public class CouponController {
 
-  private CouponService couponService;
+  private final CouponService couponService;
 
   @Autowired
   CouponController(final CouponService couponService) {

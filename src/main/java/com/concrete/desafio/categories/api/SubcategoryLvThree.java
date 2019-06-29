@@ -11,10 +11,10 @@ import java.util.Objects;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SubcategoryLvThree extends Category implements Serializable {
 
-  private String smallImageUrl;
-  private String mediumImageUrl;
-  private String largeImageUrl;
-  private List<SubcategoryLvFour> subcategories;
+  private final String smallImageUrl;
+  private final String mediumImageUrl;
+  private final String largeImageUrl;
+  private final List<SubcategoryLvFour> subcategories;
 
   public SubcategoryLvThree(
       final String id,
@@ -48,11 +48,11 @@ public class SubcategoryLvThree extends Category implements Serializable {
   }
 
   @Override
-  public boolean equals(Object o) {
+  public boolean equals(final Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     if (!super.equals(o)) return false;
-    SubcategoryLvThree that = (SubcategoryLvThree) o;
+    final SubcategoryLvThree that = (SubcategoryLvThree) o;
     return Objects.equals(getSmallImageUrl(), that.getSmallImageUrl())
         && Objects.equals(getMediumImageUrl(), that.getMediumImageUrl())
         && Objects.equals(getLargeImageUrl(), that.getLargeImageUrl())

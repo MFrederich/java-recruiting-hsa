@@ -36,8 +36,8 @@ public class CategoryControllerTest {
   @Test
   public void itShouldReturn_expectedTopFiveOutput() throws IOException {
     when(categoryRepository.fetchCategoryThree()).thenReturn(expectedApiResponse());
-    List<CategoryResponse> categoryTopFiveList = categoryController.getTopCategories().getBody();
-    List<CategoryResponse> expected = expectedTopFiveOutput();
+    final List<CategoryResponse> categoryTopFiveList = categoryController.getTopCategories().getBody();
+    final List<CategoryResponse> expected = expectedTopFiveOutput();
 
     assertEquals(categoryTopFiveList, expected);
   }
@@ -45,8 +45,8 @@ public class CategoryControllerTest {
   @Test
   public void itShouldReturnExpectedTopFiveOutput_whenHaveFourCategories() throws IOException {
     when(categoryRepository.fetchCategoryThree()).thenReturn(categoryWithOnlyFourSubcategories());
-    List<CategoryResponse> categoryTopFiveList = categoryController.getTopCategories().getBody();
-    List<CategoryResponse> categoryRemainingList =
+    final List<CategoryResponse> categoryTopFiveList = categoryController.getTopCategories().getBody();
+    final List<CategoryResponse> categoryRemainingList =
         categoryController.getRemainingCategories().getBody();
 
     assertEquals(categoryTopFiveList.size(), 4);
@@ -56,9 +56,9 @@ public class CategoryControllerTest {
   @Test
   public void itShouldReturn_expectedRemainingOutput() throws IOException {
     when(categoryRepository.fetchCategoryThree()).thenReturn(expectedApiResponse());
-    List<CategoryResponse> categoryRemainingList =
+    final List<CategoryResponse> categoryRemainingList =
         categoryController.getRemainingCategories().getBody();
-    List<CategoryResponse> expected = expectedRemainingOutput();
+    final List<CategoryResponse> expected = expectedRemainingOutput();
 
     assertEquals(categoryRemainingList, expected);
   }
@@ -66,8 +66,8 @@ public class CategoryControllerTest {
   @Test(expected = IllegalArgumentException.class)
   public void itShouldReturnIllegalArgumentException_whenSubcategoriesIsNull() throws IOException {
     when(categoryRepository.fetchCategoryThree()).thenReturn(subCategoryNullOutput());
-    ResponseEntity responseEntity = categoryController.getTopCategories();
-    ErrorDTO expectedError = new ErrorDTO("0000", "SubCategories can not be null");
+    final ResponseEntity responseEntity = categoryController.getTopCategories();
+    final ErrorDTO expectedError = new ErrorDTO("0000", "SubCategories can not be null");
     Assert.assertTrue(responseEntity.getBody() instanceof ErrorDTO);
     assertEquals(responseEntity.getBody(), expectedError);
   }
@@ -75,17 +75,17 @@ public class CategoryControllerTest {
   @Test(expected = IllegalArgumentException.class)
   public void itShouldReturnIllegalArgumentException_whenMobileMarketNotFound() throws IOException {
     when(categoryRepository.fetchCategoryThree()).thenReturn(subCategoryMobileMarketNotFound());
-    ResponseEntity responseEntity = categoryController.getTopCategories();
-    ErrorDTO expectedError = new ErrorDTO("0000", "Mobile market category not found");
+    final ResponseEntity responseEntity = categoryController.getTopCategories();
+    final ErrorDTO expectedError = new ErrorDTO("0000", "Mobile market category not found");
     Assert.assertTrue(responseEntity.getBody() instanceof ErrorDTO);
     assertEquals(responseEntity.getBody(), expectedError);
   }
 
   @Test
   public void itShouldReturnException_whenRequestThrowException() {
-    Exception failure = new Exception("not found");
-    ResponseEntity responseEntity = categoryController.handlerException(failure);
-    ErrorDTO expectedError = new ErrorDTO("0000", "not found");
+    final Exception failure = new Exception("not found");
+    final ResponseEntity responseEntity = categoryController.handlerException(failure);
+    final ErrorDTO expectedError = new ErrorDTO("0000", "not found");
     Assert.assertTrue(responseEntity.getBody() instanceof ErrorDTO);
     assertEquals(responseEntity.getBody(), expectedError);
   }

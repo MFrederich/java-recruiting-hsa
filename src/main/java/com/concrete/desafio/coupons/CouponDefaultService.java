@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @Service
 public class CouponDefaultService implements CouponService {
 
-  private CouponRepository couponRepository;
+  private final CouponRepository couponRepository;
 
   @Autowired
   public CouponDefaultService(final CouponRepository couponRepository) {
@@ -40,11 +40,11 @@ public class CouponDefaultService implements CouponService {
   }
 
   private boolean isExpired(final String expireDate) {
-    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-    String strDateNow = formatter.format(new Date());
+    final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    final String strDateNow = formatter.format(new Date());
     try {
       return mapStringToDate(expireDate, formatter).after(mapStringToDate(strDateNow, formatter));
-    } catch (ParseException e) {
+    } catch (final ParseException e) {
 
       e.printStackTrace();
     }

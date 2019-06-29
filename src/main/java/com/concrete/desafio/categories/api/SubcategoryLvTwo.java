@@ -11,8 +11,8 @@ import java.util.Objects;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SubcategoryLvTwo extends Category implements Serializable {
 
-  private String iconImageUrl;
-  private List<SubcategoryLvThree> subcategories;
+  private final String iconImageUrl;
+  private final List<SubcategoryLvThree> subcategories;
 
   public SubcategoryLvTwo(
       final String id,
@@ -34,11 +34,11 @@ public class SubcategoryLvTwo extends Category implements Serializable {
   }
 
   @Override
-  public boolean equals(Object o) {
+  public boolean equals(final Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     if (!super.equals(o)) return false;
-    SubcategoryLvTwo that = (SubcategoryLvTwo) o;
+    final SubcategoryLvTwo that = (SubcategoryLvTwo) o;
     return Objects.equals(getIconImageUrl(), that.getIconImageUrl())
         && Objects.equals(getSubcategories(), that.getSubcategories());
   }

@@ -13,7 +13,7 @@ import java.util.List;
 @Controller
 public class CategoryController {
 
-  private CategoryService categoryService;
+  private final CategoryService categoryService;
 
   @Autowired
   CategoryController(final CategoryService categoryService) {
