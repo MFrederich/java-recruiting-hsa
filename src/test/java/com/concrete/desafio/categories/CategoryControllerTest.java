@@ -30,13 +30,14 @@ public class CategoryControllerTest {
   public void setup() {
     errorHandler = new ErrorHandlerController();
     categoryService = new CategoryDefaultService(categoryRepository);
-    categoryController = new CategoryController(categoryService, errorHandler);
+    categoryController = new CategoryController(categoryService);
   }
 
   @Test
   public void itShouldReturn_expectedTopFiveOutput() throws IOException {
     when(categoryRepository.fetchCategoryThree()).thenReturn(expectedApiResponse());
-    final List<CategoryResponse> categoryTopFiveList = categoryController.getTopCategories().getBody();
+    final List<CategoryResponse> categoryTopFiveList =
+        categoryController.getTopCategories().getBody();
     final List<CategoryResponse> expected = expectedTopFiveOutput();
 
     assertEquals(categoryTopFiveList, expected);
@@ -45,7 +46,8 @@ public class CategoryControllerTest {
   @Test
   public void itShouldReturnExpectedTopFiveOutput_whenHaveFourCategories() throws IOException {
     when(categoryRepository.fetchCategoryThree()).thenReturn(categoryWithOnlyFourSubcategories());
-    final List<CategoryResponse> categoryTopFiveList = categoryController.getTopCategories().getBody();
+    final List<CategoryResponse> categoryTopFiveList =
+        categoryController.getTopCategories().getBody();
     final List<CategoryResponse> categoryRemainingList =
         categoryController.getRemainingCategories().getBody();
 
@@ -84,7 +86,7 @@ public class CategoryControllerTest {
   @Test
   public void itShouldReturnException_whenRequestThrowException() {
     final Exception failure = new Exception("not found");
-    final ResponseEntity responseEntity = categoryController.handlerException(failure);
+    final ResponseEntity responseEntity = errorHandler.handlerErrorException(failure);
     final ErrorDTO expectedError = new ErrorDTO("0000", "not found");
     Assert.assertTrue(responseEntity.getBody() instanceof ErrorDTO);
     assertEquals(responseEntity.getBody(), expectedError);
