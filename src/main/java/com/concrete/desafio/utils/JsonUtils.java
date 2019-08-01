@@ -2,20 +2,21 @@ package com.concrete.desafio.utils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import org.json.simple.parser.ParseException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 
 public class JsonUtils {
 
   public static <T> T jsonParser(
-      final ObjectMapper objectMapper, final String json, final TypeReference<T> type)
-      throws IOException {
+      final String json, final Type type){
 
-    return objectMapper.readValue(json, type);
+    return new Gson().fromJson(json, type);
   }
 
   public static String jsonToString(final String fileName) throws IOException {

@@ -40,8 +40,4 @@ public class SubCategoryResponse extends Category {
         && Objects.equals(getSubcategories(), that.getSubcategories());
   }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(super.hashCode(), getSmallImageUrl(), getSubcategories());
-  }
 }

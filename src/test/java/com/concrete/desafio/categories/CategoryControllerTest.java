@@ -30,7 +30,7 @@ public class CategoryControllerTest {
   public void setup() {
     errorHandler = new ErrorHandlerController();
     categoryService = new CategoryDefaultService(categoryRepository);
-    categoryController = new CategoryController(categoryService, errorHandler);
+    categoryController = new CategoryController(categoryService);
   }
 
   @Test
@@ -84,7 +84,7 @@ public class CategoryControllerTest {
   @Test
   public void itShouldReturnException_whenRequestThrowException() {
     final Exception failure = new Exception("not found");
-    final ResponseEntity responseEntity = categoryController.handlerException(failure);
+    final ResponseEntity responseEntity = errorHandler.handlerErrorException(failure);
     final ErrorDTO expectedError = new ErrorDTO("0000", "not found");
     Assert.assertTrue(responseEntity.getBody() instanceof ErrorDTO);
     assertEquals(responseEntity.getBody(), expectedError);

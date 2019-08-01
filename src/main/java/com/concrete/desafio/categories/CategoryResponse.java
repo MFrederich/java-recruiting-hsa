@@ -39,9 +39,4 @@ public class CategoryResponse extends Category {
     return Objects.equals(getIconImageUrl(), that.getIconImageUrl())
         && Objects.equals(getSubcategories(), that.getSubcategories());
   }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(super.hashCode(), getIconImageUrl(), getSubcategories());
-  }
 }

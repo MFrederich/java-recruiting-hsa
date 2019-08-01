@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -35,37 +34,7 @@ public class SubcategoryLvThree extends Category implements Serializable {
     return smallImageUrl;
   }
 
-  public String getMediumImageUrl() {
-    return mediumImageUrl;
-  }
-
-  public String getLargeImageUrl() {
-    return largeImageUrl;
-  }
-
   public List<SubcategoryLvFour> getSubcategories() {
     return subcategories;
-  }
-
-  @Override
-  public boolean equals(final Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    if (!super.equals(o)) return false;
-    final SubcategoryLvThree that = (SubcategoryLvThree) o;
-    return Objects.equals(getSmallImageUrl(), that.getSmallImageUrl())
-        && Objects.equals(getMediumImageUrl(), that.getMediumImageUrl())
-        && Objects.equals(getLargeImageUrl(), that.getLargeImageUrl())
-        && Objects.equals(getSubcategories(), that.getSubcategories());
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(
-        super.hashCode(),
-        getSmallImageUrl(),
-        getMediumImageUrl(),
-        getLargeImageUrl(),
-        getSubcategories());
   }
 }

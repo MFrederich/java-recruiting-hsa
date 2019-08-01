@@ -33,9 +33,4 @@ public class ErrorDTO implements Serializable {
     return Objects.equals(getCode(), errorDTO.getCode())
         && Objects.equals(getMessage(), errorDTO.getMessage());
   }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(getCode(), getMessage());
-  }
 }

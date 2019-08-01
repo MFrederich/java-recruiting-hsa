@@ -60,9 +60,4 @@ public class Coupon implements Serializable {
         && Objects.equals(getImage(), coupon.getImage())
         && Objects.equals(getExpiresAt(), coupon.getExpiresAt());
   }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(getId(), getDescription(), getSeller(), getImage(), getExpiresAt());
-  }
 }
