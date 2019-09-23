@@ -28,13 +28,13 @@ ext {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+    implementation'io.springfox:springfox-swagger2:2.9.2'
+    implementation 'io.github.openfeign:feign-gson:9.4.0'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     compile "com.googlecode.json-simple:json-simple:1.1.1"
-    compile group: 'io.github.openfeign', name: 'feign-gson', version: '9.4.0'
-    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
-    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
 
 
 }
