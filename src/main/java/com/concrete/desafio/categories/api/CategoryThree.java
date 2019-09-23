@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -24,19 +23,5 @@ public class CategoryThree extends Category implements Serializable {
 
   public List<Subcategory> getSubcategories() {
     return subcategories;
-  }
-
-  @Override
-  public boolean equals(final Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    if (!super.equals(o)) return false;
-    final CategoryThree that = (CategoryThree) o;
-    return Objects.equals(getSubcategories(), that.getSubcategories());
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(super.hashCode(), getSubcategories());
   }
 }
