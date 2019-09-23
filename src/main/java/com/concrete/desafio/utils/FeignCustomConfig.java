@@ -5,10 +5,10 @@ import feign.gson.GsonDecoder;
 import org.springframework.cloud.openfeign.support.ResponseEntityDecoder;
 import org.springframework.context.annotation.Bean;
 
-public class FeignCustomerConfig {
+public class FeignCustomConfig {
 
-    @Bean
-    public Decoder feignDecoder(){
-        return new ResponseEntityDecoder(new GsonDecoder());
-    }
+  @Bean
+  public Decoder feignDecoder() {
+    return new ResponseEntityDecoder(new GsonDecoder());
+  }
 }

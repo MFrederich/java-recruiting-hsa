@@ -4,11 +4,9 @@ import com.concrete.desafio.categories.api.CategoryRepository;
 import com.concrete.desafio.utils.ErrorDTO;
 import com.concrete.desafio.utils.ErrorHandlerController;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.BeforeAll;
+import org.mockito.Mockito;
 import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
@@ -18,16 +16,17 @@ import static com.concrete.desafio.categories.CategoryStubs.*;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+
 public class CategoryControllerTest {
 
-  @Mock private CategoryRepository categoryRepository;
+  private CategoryRepository categoryRepository;
   private CategoryService categoryService;
   private CategoryController categoryController;
   private ErrorHandlerController errorHandler;
 
-  @Before
+  @BeforeAll
   public void setup() {
+    categoryRepository = Mockito.mock(CategoryRepository.class);
     errorHandler = new ErrorHandlerController();
     categoryService = new CategoryDefaultService(categoryRepository);
     categoryController = new CategoryController(categoryService);
@@ -36,7 +35,8 @@ public class CategoryControllerTest {
   @Test
   public void itShouldReturn_expectedTopFiveOutput() throws IOException {
     when(categoryRepository.fetchCategoryThree()).thenReturn(expectedApiResponse());
-    final List<CategoryResponse> categoryTopFiveList = categoryController.getTopCategories().getBody();
+    final List<CategoryResponse> categoryTopFiveList =
+        categoryController.getTopCategories().getBody();
     final List<CategoryResponse> expected = expectedTopFiveOutput();
 
     assertEquals(categoryTopFiveList, expected);
@@ -45,7 +45,8 @@ public class CategoryControllerTest {
   @Test
   public void itShouldReturnExpectedTopFiveOutput_whenHaveFourCategories() throws IOException {
     when(categoryRepository.fetchCategoryThree()).thenReturn(categoryWithOnlyFourSubcategories());
-    final List<CategoryResponse> categoryTopFiveList = categoryController.getTopCategories().getBody();
+    final List<CategoryResponse> categoryTopFiveList =
+        categoryController.getTopCategories().getBody();
     final List<CategoryResponse> categoryRemainingList =
         categoryController.getRemainingCategories().getBody();
 
