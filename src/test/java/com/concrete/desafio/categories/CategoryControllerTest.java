@@ -1,13 +1,11 @@
 package com.concrete.desafio.categories;
 
 import com.concrete.desafio.categories.api.CategoryRepository;
-import com.concrete.desafio.utils.ErrorDTO;
-import com.concrete.desafio.utils.ErrorHandlerController;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.mockito.Mockito;
-import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,18 +14,16 @@ import static com.concrete.desafio.categories.CategoryStubs.*;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
-
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class CategoryControllerTest {
 
   private CategoryRepository categoryRepository;
   private CategoryService categoryService;
   private CategoryController categoryController;
-  private ErrorHandlerController errorHandler;
 
   @BeforeAll
   public void setup() {
     categoryRepository = Mockito.mock(CategoryRepository.class);
-    errorHandler = new ErrorHandlerController();
     categoryService = new CategoryDefaultService(categoryRepository);
     categoryController = new CategoryController(categoryService);
   }
@@ -64,30 +60,15 @@ public class CategoryControllerTest {
     assertEquals(categoryRemainingList, expected);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test()
   public void itShouldReturnIllegalArgumentException_whenSubcategoriesIsNull() throws IOException {
     when(categoryRepository.fetchCategoryThree()).thenReturn(subCategoryNullOutput());
-    final ResponseEntity responseEntity = categoryController.getTopCategories();
-    final ErrorDTO expectedError = new ErrorDTO("0000", "SubCategories can not be null");
-    Assert.assertTrue(responseEntity.getBody() instanceof ErrorDTO);
-    assertEquals(responseEntity.getBody(), expectedError);
+    Assertions.assertThrows(IllegalArgumentException.class, categoryController::getTopCategories);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test()
   public void itShouldReturnIllegalArgumentException_whenMobileMarketNotFound() throws IOException {
     when(categoryRepository.fetchCategoryThree()).thenReturn(subCategoryMobileMarketNotFound());
-    final ResponseEntity responseEntity = categoryController.getTopCategories();
-    final ErrorDTO expectedError = new ErrorDTO("0000", "Mobile market category not found");
-    Assert.assertTrue(responseEntity.getBody() instanceof ErrorDTO);
-    assertEquals(responseEntity.getBody(), expectedError);
-  }
-
-  @Test
-  public void itShouldReturnException_whenRequestThrowException() {
-    final Exception failure = new Exception("not found");
-    final ResponseEntity responseEntity = errorHandler.handlerErrorException(failure);
-    final ErrorDTO expectedError = new ErrorDTO("0000", "not found");
-    Assert.assertTrue(responseEntity.getBody() instanceof ErrorDTO);
-    assertEquals(responseEntity.getBody(), expectedError);
+    Assertions.assertThrows(IllegalArgumentException.class, categoryController::getTopCategories);
   }
 }

@@ -6,9 +6,12 @@ import com.concrete.desafio.utils.ErrorDTO;
 import com.concrete.desafio.utils.ErrorHandlerController;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.ResponseEntity;
 
@@ -20,17 +23,16 @@ import static com.concrete.desafio.coupons.CouponStubs.expectedResponse;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class CouponControllerTest {
 
-  @Mock private CouponRepository couponRepository;
-  private ErrorHandlerController errorHandler;
+  private CouponRepository couponRepository;
   private CouponService couponService;
   private CouponController couponController;
 
-  @Before
+  @BeforeAll
   public void setup() {
-    errorHandler = new ErrorHandlerController();
+    couponRepository = Mockito.mock(CouponRepository.class);
     couponService = new CouponDefaultService(couponRepository);
     couponController = new CouponController(couponService);
   }
@@ -45,12 +47,4 @@ public class CouponControllerTest {
     assertEquals(coupons, expected);
   }
 
-    @Test
-    public void itShouldReturnException_whenRequestThrowException() {
-        final Exception failure = new Exception("not found");
-        final ResponseEntity responseEntity = errorHandler.handlerErrorException(failure);
-        final ErrorDTO expectedError = new ErrorDTO("0000", "not found");
-        Assert.assertTrue(responseEntity.getBody() instanceof ErrorDTO);
-        assertEquals(responseEntity.getBody(), expectedError);
-    }
 }
