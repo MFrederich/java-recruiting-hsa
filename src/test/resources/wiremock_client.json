@@ -1,0 +1,15 @@
+{
+  "request" : {
+    "url" : "/",
+    "method" : "POST"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "",
+    "headers" : {
+      "X-Application-Context" : "application:-1",
+      "Content-Type" : "text/plain"
+    }
+  }
+}
+

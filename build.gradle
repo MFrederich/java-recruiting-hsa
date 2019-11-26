@@ -39,6 +39,9 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.2'
     testImplementation "org.mockito:mockito-core:3.0.0"
     testImplementation "org.mockito:mockito-junit-jupiter:3.0.0"
+    testCompile group: 'org.springframework.cloud', name: 'spring-cloud-contract-wiremock', version: '2.1.2.RELEASE'
+    testCompile "com.github.tomakehurst:wiremock-jre8:2.25.1"
+
 
 }
 
@@ -58,18 +61,8 @@ jacocoTestReport {
     }
 }
 
-jacocoTestCoverageVerification {
-    violationRules {
-        rule {
-            limit {
-                counter = 'BRANCH'
-            }
-            excludes = [
-                    'com.concrete.desafio.categories.CategoryResponse',
-                    'com.concrete.desafio.categories.SubCategoryResponse',
-                    'com.concrete.desafio.categories.api.*',
-                    'com.concrete.desafio.coupon.api.*'
-            ]
-        }
-    }
+
+sourceSets {
+    test.java.srcDirs += 'src/testIntegration/java'
+    test.resources.srcDirs += 'src/testIntegration/resources'
 }
