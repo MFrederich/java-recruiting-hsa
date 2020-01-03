@@ -1,0 +1,9 @@
+[
+  {
+    "id": "COUPON_1",
+    "description": "50% Discount",
+    "seller": "Crazy Seller",
+    "image": "https://i4.visitchile.com/img/GalleryContent/8822/slider/Torres_del_Paine.jpg",
+    "expiresAt": "2045-12-01"
+  }
+]

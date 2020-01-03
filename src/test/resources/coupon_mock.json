@@ -1,0 +1,23 @@
+{
+  "request": {
+    "url": "/coupons",
+    "method": "POST"
+  },
+  "response": {
+    "status": 200,
+    "body": [
+      {
+        "id": "COUPON_1",
+        "description": "50% Discount",
+        "seller": "Crazy Seller",
+        "image": "https://i4.visitchile.com/img/GalleryContent/8822/slider/Torres_del_Paine.jpg",
+        "expiresAt": "2045-12-01"
+      }
+    ],
+    "headers": {
+      "X-Application-Context": "application:-1",
+      "Content-Type": "text/plain"
+    }
+  }
+}
+
