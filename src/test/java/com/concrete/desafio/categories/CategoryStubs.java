@@ -1,6 +1,6 @@
 package com.concrete.desafio.categories;
 
-import com.concrete.desafio.categories.api.CategoryThree;
+import com.concrete.desafio.categories.models.CategoryThree;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.springframework.http.HttpStatus;

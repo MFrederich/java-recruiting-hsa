@@ -26,14 +26,14 @@ public class CategoryController {
 
   @ResponseBody
   @ApiOperation(value = "Get top five categories")
-  @GetMapping(value = "/getTopCategories", produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(value = "/topFive", produces = MediaType.APPLICATION_JSON_VALUE)
   ResponseEntity<List<CategoryResponse>> getTopCategories() {
     return categoryService.topFiveCategories();
   }
 
   @ResponseBody
-  @ApiOperation(value = "Get remaining categories")
-  @GetMapping(value = "/getRemainingCategories", produces = MediaType.APPLICATION_JSON_VALUE)
+  @ApiOperation(value = "All categories")
+  @GetMapping(value="/all",produces = MediaType.APPLICATION_JSON_VALUE)
   ResponseEntity<List<CategoryResponse>> getRemainingCategories() {
 
     return categoryService.remainingCategories();

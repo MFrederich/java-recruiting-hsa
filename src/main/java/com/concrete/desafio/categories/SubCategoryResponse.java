@@ -1,7 +1,7 @@
 package com.concrete.desafio.categories;
 
-import com.concrete.desafio.categories.api.Category;
-import com.concrete.desafio.categories.api.SubcategoryLvFour;
+import com.concrete.desafio.categories.models.Category;
+import com.concrete.desafio.categories.models.SubcategoryLvFour;
 
 import java.util.List;
 import java.util.Objects;

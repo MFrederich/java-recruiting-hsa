@@ -1,14 +1,14 @@
 package com.concrete.desafio.coupons;
 
-import com.concrete.desafio.coupons.api.Coupon;
+import com.concrete.desafio.coupons.models.Coupon;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -27,10 +27,7 @@ public class CouponController {
 
   @ResponseBody
   @ApiOperation(value = "List coupon")
-  @RequestMapping(
-      value = "/getCoupons",
-      produces = MediaType.APPLICATION_JSON_VALUE,
-      method = RequestMethod.GET)
+  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   ResponseEntity<List<Coupon>> getCoupons() {
     return couponService.getCoupons();
   }

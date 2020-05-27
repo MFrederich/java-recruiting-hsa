@@ -1,27 +1,26 @@
-package com.concrete.desafio.categories.api;
+package com.concrete.desafio.categories.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import java.io.Serializable;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CategoryThree extends Category implements Serializable {
+public class Subcategory extends Category {
 
-  private final List<Subcategory> subcategories;
+  private final List<SubcategoryLvTwo> subcategories;
 
-  public CategoryThree(
+  public Subcategory(
       final String id,
       final String name,
       final int relevance,
-      final List<Subcategory> subcategories) {
+      final List<SubcategoryLvTwo> subcategories) {
     super(id, name, relevance);
     this.subcategories = subcategories;
   }
 
-  public List<Subcategory> getSubcategories() {
+  public List<SubcategoryLvTwo> getSubcategories() {
     return subcategories;
   }
 }

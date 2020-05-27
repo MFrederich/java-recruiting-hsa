@@ -1,5 +1,6 @@
 package com.concrete.desafio.coupons.api;
 
+import com.concrete.desafio.coupons.models.Coupon;
 import com.concrete.desafio.utils.FeignCustomConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;

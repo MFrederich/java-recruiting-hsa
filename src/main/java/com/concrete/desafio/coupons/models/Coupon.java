@@ -1,4 +1,4 @@
-package com.concrete.desafio.coupons.api;
+package com.concrete.desafio.coupons.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;

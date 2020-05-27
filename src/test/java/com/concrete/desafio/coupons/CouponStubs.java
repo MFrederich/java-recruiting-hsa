@@ -1,6 +1,6 @@
 package com.concrete.desafio.coupons;
 
-import com.concrete.desafio.coupons.api.Coupon;
+import com.concrete.desafio.coupons.models.Coupon;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.springframework.http.HttpStatus;

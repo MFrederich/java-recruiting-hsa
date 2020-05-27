@@ -1,6 +1,6 @@
 package com.concrete.desafio.coupons;
 
-import com.concrete.desafio.coupons.api.Coupon;
+import com.concrete.desafio.coupons.models.Coupon;
 import com.concrete.desafio.coupons.api.CouponRepository;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import org.junit.jupiter.api.AfterEach;

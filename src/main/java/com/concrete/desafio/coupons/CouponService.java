@@ -1,6 +1,6 @@
 package com.concrete.desafio.coupons;
 
-import com.concrete.desafio.coupons.api.Coupon;
+import com.concrete.desafio.coupons.models.Coupon;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;

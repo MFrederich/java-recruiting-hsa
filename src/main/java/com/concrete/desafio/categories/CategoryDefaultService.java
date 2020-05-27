@@ -1,6 +1,10 @@
 package com.concrete.desafio.categories;
 
 import com.concrete.desafio.categories.api.*;
+import com.concrete.desafio.categories.models.CategoryThree;
+import com.concrete.desafio.categories.models.Subcategory;
+import com.concrete.desafio.categories.models.SubcategoryLvThree;
+import com.concrete.desafio.categories.models.SubcategoryLvTwo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,12 +33,8 @@ public class CategoryDefaultService implements CategoryService {
   @Override
   public ResponseEntity<List<CategoryResponse>> remainingCategories() {
     final List<SubcategoryLvTwo> subcategoryLvTwo = sortSubCategoryLvTwo();
-    final List<String> topCategoryNameList =
-        getTopFiveCategories().stream().map(CategoryResponse::getName).collect(Collectors.toList());
     return new ResponseEntity<>(
-        mapCategories(subcategoryLvTwo).stream()
-            .filter(sub -> !topCategoryNameList.contains(sub.getName()))
-            .collect(Collectors.toList()),
+        mapCategories(subcategoryLvTwo),
         HttpStatus.OK);
   }
 

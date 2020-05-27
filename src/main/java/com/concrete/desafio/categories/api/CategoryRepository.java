@@ -1,5 +1,6 @@
 package com.concrete.desafio.categories.api;
 
+import com.concrete.desafio.categories.models.CategoryThree;
 import com.concrete.desafio.utils.FeignCustomConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;

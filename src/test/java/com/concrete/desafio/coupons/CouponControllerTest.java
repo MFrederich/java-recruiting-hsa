@@ -1,19 +1,11 @@
 package com.concrete.desafio.coupons;
 
-import com.concrete.desafio.coupons.api.Coupon;
+import com.concrete.desafio.coupons.models.Coupon;
 import com.concrete.desafio.coupons.api.CouponRepository;
-import com.concrete.desafio.utils.ErrorDTO;
-import com.concrete.desafio.utils.ErrorHandlerController;
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
 import java.util.List;
