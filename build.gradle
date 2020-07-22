@@ -26,6 +26,10 @@ ext {
 	set('springCloudVersion', "Greenwich.SR1")
 }
 
+test {
+    useJUnitPlatform()
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
@@ -40,10 +44,8 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.2'
     testImplementation "org.mockito:mockito-core:3.0.0"
     testImplementation "org.mockito:mockito-junit-jupiter:3.0.0"
-    testCompile group: 'org.springframework.cloud', name: 'spring-cloud-contract-wiremock', version: '2.1.2.RELEASE'
-    testCompile "com.github.tomakehurst:wiremock-jre8:2.25.1"
-
-
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.2.6.RELEASE'
+    
 }
 
 dependencyManagement {

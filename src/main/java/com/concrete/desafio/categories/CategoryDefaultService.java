@@ -1,6 +1,6 @@
 package com.concrete.desafio.categories;
 
-import com.concrete.desafio.categories.api.*;
+import com.concrete.desafio.categories.api.CategoryRepository;
 import com.concrete.desafio.categories.models.CategoryThree;
 import com.concrete.desafio.categories.models.Subcategory;
 import com.concrete.desafio.categories.models.SubcategoryLvThree;
@@ -32,10 +32,9 @@ public class CategoryDefaultService implements CategoryService {
 
   @Override
   public ResponseEntity<List<CategoryResponse>> remainingCategories() {
-    final List<SubcategoryLvTwo> subcategoryLvTwo = sortSubCategoryLvTwo();
-    return new ResponseEntity<>(
-        mapCategories(subcategoryLvTwo),
-        HttpStatus.OK);
+    final List<SubcategoryLvTwo> subcategoryLvTwo =
+        sortSubCategoryLvTwo().stream().skip(5).collect(Collectors.toList());
+    return new ResponseEntity<>(mapCategories(subcategoryLvTwo), HttpStatus.OK);
   }
 
   private List<CategoryResponse> getTopFiveCategories() {

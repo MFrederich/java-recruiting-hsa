@@ -1,54 +1,51 @@
 package com.concrete.desafio.coupons;
 
-import com.concrete.desafio.coupons.models.Coupon;
 import com.concrete.desafio.coupons.api.CouponRepository;
-import com.github.tomakehurst.wiremock.WireMockServer;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
+import static com.concrete.desafio.coupons.CouponStubs.expectedApiResponse;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.List;
-
-import static com.github.tomakehurst.wiremock.client.WireMock.get;
-import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
-import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
-
-@ExtendWith(SpringExtension.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+@AutoConfigureMockMvc
 public class CouponIntegrationTest {
 
-  private WireMockServer wireMockServer;
-  @Autowired private CouponRepository couponRepository;
-  private CouponController couponController;
+    @Autowired
+    private MockMvc mvc;
+    @Autowired
+    protected WebApplicationContext wac;
+    private CouponService couponService;
 
-  @BeforeAll
-  private void setup() {
-    this.wireMockServer = new WireMockServer();
-    this.wireMockServer.start();
+    @Before
+    public void setup(){
+        this.mvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+        couponService = Mockito.mock(CouponDefaultService.class);
 
-    final CouponService couponService = new CouponDefaultService(couponRepository);
-    couponController = new CouponController(couponService);
-  }
+    }
 
-  @AfterEach
-  void stopWireMockServer() {
-    this.wireMockServer.stop();
-  }
-
-  @Test
-  public void contextLoads() throws Exception {
-    wireMockServer.stubFor(
-        get(urlEqualTo("/coupons"))
-            .willReturn(
-                aResponse()
-                    .withStatus(200)
-                    .withHeader("Content-Type", "application/json")
-                    .withBodyFile("")));
-    List<Coupon> coupons = couponController.getCoupons().getBody();
-  }
+    @Test
+    public void itShouldReturnCoupons_whenApiResponse200() throws Exception{
+        when(couponService.getCoupons()).thenReturn(expectedApiResponse());
+        mvc.perform(get("/coupon")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content()
+                        .contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
+    }
 }
